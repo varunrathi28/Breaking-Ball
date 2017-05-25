@@ -20,7 +20,7 @@
     self =[super initWithSize:size];
     
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
-    self.physicsWorld.gravity = CGVectorMake(0, -1.6);
+    self.physicsWorld.gravity = CGVectorMake(0,0);
     self.backgroundColor = [SKColor whiteColor];
     SKSpriteNode * ballNode = [SKSpriteNode spriteNodeWithImageNamed:@"ball"];
     ballNode.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
@@ -31,6 +31,12 @@
     
     
     [self addChild:ballNode];
+    
+    CGVector myVector = CGVectorMake(10, 50);
+    [ballNode.physicsBody applyImpulse:myVector];
+    ballNode.physicsBody.linearDamping = 0;
+    ballNode.physicsBody.restitution = 1;
+    ballNode.physicsBody.friction = 0;
     
     return self;
     
